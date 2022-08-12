@@ -1,0 +1,5 @@
+make.exe --dry-run --keep-going --print-directory
+make: Entering directory 'c:/Users/srwsf/OneDrive/Desktop/projects/sdl'
+g++ -Isrc/include -Lsrc/lib -o main main.cpp -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
+make: Leaving directory 'c:/Users/srwsf/OneDrive/Desktop/projects/sdl'
+ 
