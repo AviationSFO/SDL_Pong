@@ -6,27 +6,19 @@ This is a simple implementation of the classic Pong game I made to test my new k
 - SDL2 graphics
 
 # Installation
-## Normal People
-For most people who acctually want to play the game, you can download the compiled .exe from the latest release.
-
-## Source Code
-As for the rest of you, if you want the source code to contribute to the project, you can clone it with the following command:
-
-```bash
-git clone https://github.com/AviationSFO/SDL_Pong.git
+Copy and paste into terminal
 ```
-In order to edit and compile the source code, you need to install the following dependencies:
+git clone https://github.com/AviationSFO/SDL_pong.git
+```
 
-* [SDL2](https://www.libsdl.org/download-2.0.php)
-* [SDL2_image](https://www.libsdl.org/projects/SDL_image/release-2.0.php)
-* [SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf/release-2.0.php)
+## Contributing
+If you want to contribute to the project, you are going to also need to install the following:
+
+* mingw GCC compiler
 * Make
 
 Make sure you have everything set up properly for vscode and mingw.
 
-That means you should have a working environment with the following:
-* Everything included in the source code download
-* src directory with include and lib directories
-* And all the DLLs from the various SDL parts for the project
-
 If you need help doing this, you can watch [this video](https://www.youtube.com/watch?v=jUZZC9UXyFs)
+
+Thanks to the [SDL2](https://www.libsdl.org/) project for the SDL2 library which I have included pre installed and ready in the project.
