@@ -14,6 +14,7 @@ git clone https://github.com/AviationSFO/SDL_pong.git
 ## Contributing
 If you want to contribute to the project, you are going to also need to install the following:
 
+* SDL2 libraries
 * mingw GCC compiler
 * Make
 
@@ -21,4 +22,4 @@ Make sure you have everything set up properly for vscode and mingw.
 
 If you need help doing this, you can watch [this video](https://www.youtube.com/watch?v=jUZZC9UXyFs)
 
-Thanks to the [SDL2](https://www.libsdl.org/) project for the SDL2 library which I have included pre installed and ready in the project.
+Thanks to the [SDL2](https://www.libsdl.org/) project for the SDL2 library which I have included the DLLs for installed and ready in the project.
