@@ -3,6 +3,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <string>
+#include <crtdbg.h>
 
 #define WIDTH 800
 #define HEIGHT 600
@@ -47,6 +48,8 @@ void reset_ball()
 
 int main(int argc, char *argv[])
 {
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
     SDL_Init(SDL_INIT_EVERYTHING);
 
     SDL_Window *window = SDL_CreateWindow(
@@ -87,16 +90,10 @@ int main(int argc, char *argv[])
     TTF_Init();
     TTF_Font *font = TTF_OpenFont("assets/NovaSquare-Regular.ttf", 24);
     SDL_Color White = {255, 255, 255};
-    SDL_Surface *fontSurf = TTF_RenderText_Solid(font, "0", White);
-    SDL_Texture *fontTex_a = SDL_CreateTextureFromSurface(renderer, fontSurf);
-    SDL_Surface *fontSurf2 = TTF_RenderText_Solid(font, "0", White);
-    SDL_Texture *fontTex_b = SDL_CreateTextureFromSurface(renderer, fontSurf2);
 
     SDL_FreeSurface(surface);
     SDL_FreeSurface(surface2);
     SDL_FreeSurface(bg);
-    SDL_FreeSurface(fontSurf);
-    SDL_FreeSurface(fontSurf2);
 
     destL_R.y = 300 - 24;
 
@@ -125,8 +122,10 @@ int main(int argc, char *argv[])
     score_b_rect.w = 48;
     score_b_rect.h = 48;
 
-
-
+    SDL_Surface *fontSurf;
+    SDL_Surface *fontSurf2;
+    SDL_Texture *fontTex_a;
+    SDL_Texture *fontTex_b;
 
     // main loop
     while (true)
@@ -171,8 +170,8 @@ int main(int argc, char *argv[])
 
             fps = frameCount;
             frameCount = 0;
-            system("cls");
-            std::cout << "FPS: " << fps << std::endl;
+            // system("cls");
+            // std::cout << "FPS: " << fps << std::endl;
         }
 
         // update ball
@@ -218,22 +217,19 @@ int main(int argc, char *argv[])
         {
             destR_R.y -= 3;
         }
+        // update score and text
+        fontSurf = TTF_RenderText_Solid(font, std::to_string(score_a).c_str(), White);
+        fontTex_a = SDL_CreateTextureFromSurface(renderer, fontSurf);
+        SDL_FreeSurface(fontSurf);
+
+        fontSurf2 = TTF_RenderText_Solid(font, std::to_string(score_b).c_str(), White);
+        fontTex_b = SDL_CreateTextureFromSurface(renderer, fontSurf2);
+        SDL_FreeSurface(fontSurf2);
 
         // update finish/render
         SDL_RenderClear(renderer);
 
         SDL_RenderCopy(renderer, bgTex, NULL, NULL);
-
-        // update scores
-        SDL_Surface *fontSurf = TTF_RenderText_Solid(font, std::to_string(score_a).c_str(), White);
-        SDL_Texture *fontTex_a = SDL_CreateTextureFromSurface(renderer, fontSurf);
-        SDL_FreeSurface(fontSurf);
-        
-        SDL_Surface *fontSurf2 = TTF_RenderText_Solid(font, std::to_string(score_b).c_str(), White);
-        SDL_Texture *fontTex_b = SDL_CreateTextureFromSurface(renderer, fontSurf2);
-        SDL_FreeSurface(fontSurf2);
-
-
 
         SDL_RenderCopy(renderer, fontTex_a, NULL, &score_a_rect);
 
@@ -254,6 +250,15 @@ int main(int argc, char *argv[])
         }
     }
 
+    // destructor
+    TTF_CloseFont(font);
+    TTF_Quit();
+    SDL_DestroyTexture(fontTex_a);
+    SDL_DestroyTexture(fontTex_b);
+    SDL_DestroyTexture(bgTex);
+    SDL_DestroyTexture(fishTex);
+    SDL_DestroyTexture(ballTex);
+    SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 
